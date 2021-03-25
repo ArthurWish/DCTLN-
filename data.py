@@ -199,7 +199,7 @@ def load_partial_data(speed, data_type):
         x, y = load_mat('CWRU/' + data_type + '/' + str(speed) + '/' +
                         fault_class_partial[i] + '.mat', fault_labels_partial_oh[i], data_config.multiple,
                         n_partial,
-                        snr=data_config.add_snr, noise=False)
+                        snr=data_config.add_snr, noise=True)
         data = np.vstack((data, x))
         label = np.vstack((label, y))
 

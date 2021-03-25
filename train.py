@@ -63,7 +63,7 @@ for epoch in trange(train_config.train_step, desc='DCTLN epoch', unit='epoch'):
                                    source_label)  # combines :func:`nn.LogSoftmax` and :func:`nn.NLLLoss`
         adv_loss = BCEWithLogitsLoss(domain_prob_s,
                                      torch.ones_like(domain_prob_s))  # combines a `Sigmoid` layer and the `BCELoss`
-        adv_loss += BCEWithLogitsLoss(domain_prob_t, torch.zeros_like(domain_prob_s))
+        adv_loss += BCEWithLogitsLoss(domain_prob_t, torch.zeros_like(domain_prob_t))
         mmd_loss = MMDLoss(feature_s, feature_t)
         # Backward to update the network's parameters
         with OptimizerManager([optimizer_extractor, optimizer_con_cls, optimizer_domain_cls]):
