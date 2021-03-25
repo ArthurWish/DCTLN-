@@ -1,7 +1,6 @@
 # Deep Convolutional Transfer Learning Network
 from torch import optim
 from tqdm import trange
-from matplotlib.pyplot import plot
 from network import *
 from utils import *
 
