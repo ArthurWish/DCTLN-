@@ -18,7 +18,10 @@ utils.py 工具类
 train_log.yaml log日志配置代码
 ```
 ### 文件夹
-> CWRU: 凯斯西楚大学数据集
-> Log: 日志
-> SaveModel: 模型保存
-> SavePicture: 训练图片保存
+> CWRU: 凯斯西楚大学数据集  
+>
+> Log: 日志  
+>
+> SaveModel: 模型保存  
+>
+> SavePicture: 训练图片保存  
