@@ -20,13 +20,13 @@ dict_fault = {
     '8': '0.014-Ball',
     '9': '0.021-Ball',
 }
-fault_class = [dict_fault['6'], dict_fault['1'], dict_fault['0'], dict_fault['7'], dict_fault['4'], dict_fault['5'],
-               dict_fault['3'], dict_fault['8'], dict_fault['2'], dict_fault['9'], ]
-
-fault_class_partial = [fault_class[0], fault_class[1], fault_class[2], fault_class[3], fault_class[4], fault_class[5]
-                       , fault_class[6]]
-# fault_class[8],fault_class[9],], fault_class[3],, fault_class[1],fault_class[2]
-#                        fault_class[4],fault_class[5],fault_class[6]
+fault_class = [dict_fault['6'], dict_fault['1'], dict_fault['2'], dict_fault['7'], dict_fault['4'], dict_fault['5'],
+               dict_fault['3'], dict_fault['8'], dict_fault['0'], dict_fault['9'], ]
+# [dict_fault['2'], dict_fault['8'], dict_fault['4'], dict_fault['9'], dict_fault['0'], dict_fault['5'],
+#  dict_fault['3'], dict_fault['1'], dict_fault['7'], dict_fault['6']]
+fault_class_partial = [fault_class[0], fault_class[1],fault_class[2],fault_class[3]]
+# fault_class[8],fault_class[9],], fault_class[3],, fault_class[1],fault_class[2], fault_class[2], fault_class[3], fault_class[4]
+#                        fault_class[4],fault_class[5],fault_class[6],fault_class[7],fault_class[8],fault_class[9]
 
 n_total = len(fault_class)  # 总类别数
 n_partial = len(fault_class_partial)  # 目标域类别
@@ -60,10 +60,10 @@ class data_config:
     数据设置类
     '''
     source_speed = 1797
-    target_speed = 1730
+    target_speed = 1750
     data_type = '12k_Drive_End'  # 驱动端
     batch_size = 128
-    data_step = 300
+    data_step = 600
     data_length = 1024
     multiple = 1
     add_snr = 2  # 信噪比
@@ -97,7 +97,7 @@ fault_labels_partial = [i for i in range(0, n_partial)]
 fault_labels_partial_oh = one_hot_np(fault_labels_partial, n_partial)
 
 
-def load_mat(file_path, label, multiple, n_class, snr, number=400, noise=False):
+def load_mat(file_path, label, multiple, n_class, snr, number=200, noise=False):
     """
     读取文件中的.mat文件，并预处理
     :param file_path: 读取文件路径
@@ -199,7 +199,7 @@ def load_partial_data(speed, data_type):
         x, y = load_mat('CWRU/' + data_type + '/' + str(speed) + '/' +
                         fault_class_partial[i] + '.mat', fault_labels_partial_oh[i], data_config.multiple,
                         n_partial,
-                        snr=data_config.add_snr, noise=True)
+                        snr=data_config.add_snr, noise=False)
         data = np.vstack((data, x))
         label = np.vstack((label, y))
 

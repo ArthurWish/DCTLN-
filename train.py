@@ -85,6 +85,8 @@ for epoch in trange(train_config.train_step, desc='DCTLN epoch', unit='epoch'):
             'condition_class': condition_classifier.state_dict(),
             'domain_class': domain_classifier.state_dict()
         }
+        if source_acc > best_source_acc:
+            best_source_acc = source_acc
         if target_acc > best_target_acc:
             best_target_acc = target_acc
             with open(os.path.join(train_config.log_dir, 'best_train.pkl'), 'wb') as f:
@@ -92,6 +94,7 @@ for epoch in trange(train_config.train_step, desc='DCTLN epoch', unit='epoch'):
             print('[information]*********the model saved**********')
 
 # plot accuracy figure
+logging.info('best source acc:{}, best target acc:{}'.format(best_source_acc, best_target_acc))
 plt.plot(list_acc_s, 'r-.', label='source')
 plt.plot(list_acc_t, 'b--', label='target')
 plt.title('DCTLN network')
