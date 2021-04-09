@@ -6,7 +6,7 @@
 >  
 > 需要pytorch  
 >
-> 其他包根据运行错误提示下载
+> 下载包 使用指令 **pip install -r requirements.txt**
 >
 ### 代码讲解
 

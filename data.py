@@ -59,8 +59,8 @@ class data_config:
     '''
     数据设置类
     '''
-    source_speed = 1797
-    target_speed = 1750
+    source_speed = 1730
+    target_speed = 1797
     data_type = '12k_Drive_End'  # 驱动端
     batch_size = 128
     data_step = 600
@@ -75,7 +75,7 @@ class train_config:
     fig_path = './SavePicture/' + 'S' + str(data_config.source_speed) + '_' + str(n_total) + \
                'T_' + str(data_config.target_speed) + '_' + str(n_partial)
     train_step = 50
-    train_lr = 0.001
+    train_lr = 0.0002
     train_momentum = 0.9
     train_wight_decay = 0.0005
     gpus = 1
@@ -199,7 +199,7 @@ def load_partial_data(speed, data_type):
         x, y = load_mat('CWRU/' + data_type + '/' + str(speed) + '/' +
                         fault_class_partial[i] + '.mat', fault_labels_partial_oh[i], data_config.multiple,
                         n_partial,
-                        snr=data_config.add_snr, noise=False)
+                        snr=data_config.add_snr, noise=True)
         data = np.vstack((data, x))
         label = np.vstack((label, y))
 
